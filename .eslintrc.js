@@ -1,10 +1,41 @@
 module.exports = {
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		ecmaVersion: 2020, // Allows parsing of ECMAScript version (2020 is the latest)
+		sourceType: 'module', // Allows using imports
+		ecmaFeatures: {
+			jsx: true, // React .JSX-files support
+		},
+	},
+	settings: {
+		'import/resolver': {
+			alias: {
+				map: [
+					['@app', './src'],
+					['@images', './src/images'],
+				],
+				extensions: ['.js', '.ts', '.tsx'],
+			},
+		},
+		'import/extensions': ['always'],
+		react: {
+			version: 'detect',
+		},
+		polyfills: [
+			'Promise',
+			'URL',
+			'URLSearchParams',
+		],
+	},
 	extends: [
 		'airbnb',
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:compat/recommended',
 		'plugin:sonarjs/recommended',
+	],
+	plugins: [
+		'@typescript-eslint',
 	],
 	overrides: [
 		{
@@ -24,33 +55,6 @@ module.exports = {
 				'react/jsx-props-no-multi-spaces': 'off',
 			},
 		},
-	],
-	settings: {
-		'import/resolver': {
-			alias: {
-				map: [
-					['@app', './src'],
-				],
-				extensions: ['.js', '.ts', '.tsx'],
-			},
-		},
-		react: {
-			version: 'detect',
-		},
-		polyfills: [
-			'Promise',
-			'URL',
-			'URLSearchParams',
-		],
-	},
-	parser: "@typescript-eslint/parser",
-	parserOptions: {
-		"ecmaVersion": "latest",
-		"sourceType": "module"
-	},
-	plugins: [
-		"react",
-		"@typescript-eslint"
 	],
 	rules: {
 		'no-use-before-define': 'off',
@@ -161,4 +165,4 @@ module.exports = {
 		],
 		'unicode-bom': 'off',
 	},
-}
+};
