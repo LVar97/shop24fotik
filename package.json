@@ -5,6 +5,14 @@
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.7",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/builder-webpack5": "^6.5.15",
+    "@storybook/manager-webpack5": "^6.5.15",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "@types/sass": "^1.43.1",
@@ -86,7 +94,8 @@
     "lint:style:fix": "npx stylelint ./src/scss/**/*.scss --fix",
     "lint": "npm run lint:code && npm run lint:style",
     "lint:fix": "npm run lint:code:fix && npm run lint:style:fix",
-    "test": "node scripts/test.js"
+    "storybook": "start-storybook -p 6006 --no-manager-cache",
+    "build-storybook": "build-storybook"
   },
   "browserslist": {
     "production": [
