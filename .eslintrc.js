@@ -1,11 +1,39 @@
 module.exports = {
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		ecmaVersion: 'latest',
+		sourceType: 'module',
+		ecmaFeatures: {
+			jsx: true, // React .JSX-files support
+		},
+	},
 	extends: [
 		'airbnb',
+		'eslint:recommended',
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:compat/recommended',
 		'plugin:sonarjs/recommended',
 	],
+	settings: {
+		'import/resolver': {
+			alias: {
+				map: [
+					['@app', './src'],
+					['@image', './src/image'],
+				],
+				extensions: ['.js', '.ts', '.tsx'],
+			},
+		},
+		react: {
+			version: 'detect',
+		},
+		polyfills: [
+			'Promise',
+			'URL',
+			'URLSearchParams',
+		],
+	},
 	overrides: [
 		{
 			files: ['*.js'],
@@ -25,32 +53,8 @@ module.exports = {
 			},
 		},
 	],
-	settings: {
-		'import/resolver': {
-			alias: {
-				map: [
-					['@app', './src'],
-				],
-				extensions: ['.js', '.ts', '.tsx'],
-			},
-		},
-		react: {
-			version: 'detect',
-		},
-		polyfills: [
-			'Promise',
-			'URL',
-			'URLSearchParams',
-		],
-	},
-	parser: "@typescript-eslint/parser",
-	parserOptions: {
-		"ecmaVersion": "latest",
-		"sourceType": "module"
-	},
 	plugins: [
-		"react",
-		"@typescript-eslint"
+		'@typescript-eslint',
 	],
 	rules: {
 		'no-use-before-define': 'off',
@@ -109,6 +113,22 @@ module.exports = {
 				'newlines-between': 'always-and-inside-groups',
 			},
 		],
+		'import/extensions': [
+			'error',
+			'always',
+			{
+				ts: 'never',
+				tsx: 'never',
+				js: 'never',
+				jsx: 'never',
+			},
+		],
+		'import/no-extraneous-dependencies': [
+			'error',
+			{
+				devDependencies: true,
+			},
+		],
 
 		'react/state-in-constructor': ['error', 'never'], // Forbid setting state in constructor - specify with prop setter
 		'react/jsx-indent': ['error', 'tab', { checkAttributes: true, indentLogicalExpressions: true }], // Ident .jsx nodes with tabs
@@ -122,6 +142,13 @@ module.exports = {
 		'react/require-default-props': 'off', // Allow skipping default props
 		'react/no-unescaped-entities': 'off', // allow quotation marks
 		'react/jsx-props-no-multi-spaces': 'off', // Allow blank line between component props
+		'react/function-component-definition': [
+			2,
+			{
+				namedComponents: 'arrow-function',
+				unnamedComponents: 'arrow-function',
+			},
+		],
 
 		'jsx-a11y/no-static-element-interactions': 'off',
 		'jsx-a11y/click-events-have-key-events': 'off',
@@ -138,6 +165,7 @@ module.exports = {
 		], // Allow input to be outside a label
 		'jsx-a11y/anchor-has-content': 'off',
 		'jsx-a11y/anchor-is-valid': 'off',
+		'jsx-a11y/tabindex-no-positive': 'off',
 
 		'@typescript-eslint/no-var-requires': 'off', // Allow require imports
 		'@typescript-eslint/no-inferrable-types': 'off',
@@ -161,4 +189,4 @@ module.exports = {
 		],
 		'unicode-bom': 'off',
 	},
-}
+};
